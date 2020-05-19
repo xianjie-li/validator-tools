@@ -5,13 +5,13 @@ interface Config {
   nameKey?: string;
 }
 
-function createMessagesTemplate({ hasName = true, nameKey = 'name' }: Config) {
-  const nameVar = hasName ? `'\${${nameKey}}'` : '';
+function createMessagesTemplate({ hasName = true, nameKey = 'name' } = {} as Config) {
+  const nameVar = hasName ? `\${${nameKey}}` : '';
   const nameVarRightSpace = hasName ? `${nameVar} ` : '';
 
   return {
     default: `字段验证错误${nameVar}`,
-    required: hasName ? `${nameVarRightSpace}是必填项` : '该项必填',
+    required: `${nameVarRightSpace}该项必填`,
     enum: `${nameVarRightSpace}必须是[\${enum}]中的一个`,
     whitespace: `${nameVarRightSpace}不能为空字符`,
     date: {
@@ -36,8 +36,8 @@ function createMessagesTemplate({ hasName = true, nameKey = 'name' }: Config) {
     },
     string: {
       len: `${nameVarRightSpace}必须为\${len}个字符`,
-      min: `${nameVarRightSpace}最少\${len}个字符`,
-      max: `${nameVarRightSpace}最多\${len}个字符`,
+      min: `${nameVarRightSpace}最少\${min}个字符`,
+      max: `${nameVarRightSpace}最多\${max}个字符`,
       range: `${nameVarRightSpace}必须在\${min}-\${max}个字符之间`,
     },
     number: {
@@ -60,4 +60,4 @@ function createMessagesTemplate({ hasName = true, nameKey = 'name' }: Config) {
 
 export { createMessagesTemplate };
 
-export default createMessagesTemplate({ hasName: true });
+export default createMessagesTemplate();

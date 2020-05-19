@@ -1,7 +1,7 @@
 {
   "name": "@lxjx/async-filed-cn-template",
   "description": "`async-validator` zh-CN messages template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/index.js",
   "types": "./dist",
   "author": "lxj",

@@ -20,7 +20,7 @@ console.log(createMessagesTemplate({ hasName: false, nameKey: 'label' }));
 ## 在[async-validator](https://github.com/yiminghe/async-validator/)中使用 [暂未实现]
 ```ts
 // 导出一个对async-validator的简单封装, 省去Schema实例创建等繁琐步骤
-import validator from '@lxjx/async-filed-cn-template/original';
+import validator from '@lxjx/async-filed-cn-template/validator';
 
 validator.hasName = false; // 通过静态属性进行一些简单的配置
 

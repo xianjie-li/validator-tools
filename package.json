@@ -1,5 +1,5 @@
 {
-  "name": "@lxjx/validator-tools",
+  "name": "@lxjx/validate-tools",
   "description": "`async-validator` zh-CN messages template and simple validator",
   "version": "1.0.1",
   "main": "./dist/index.js",
@@ -19,6 +19,7 @@
     "typescript": "^3.9.2"
   },
   "dependencies": {
+    "@lxjx/preset-config": "^0.0.4",
     "@lxjx/utils": "^1.4.5",
     "async-validator": "^3.3.0",
     "tslib": "^2.0.0"

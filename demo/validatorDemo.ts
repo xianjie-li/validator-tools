@@ -1,19 +1,21 @@
-import validator from "../dist/validator";
+import validator from '../dist/validator';
+import Schema, { Rules } from 'async-validator';
+import { ValidatorRules } from '../source/validator';
 
 const source = {
-  name: '12',
+  date: [2, 3],
   age: 18,
   desc: 'safsaf',
-}
+  like: 'safsaf',
+};
 
-const rules = {
-  name: [
-    {
-      required: true,
-      len: 5,
-      label: '姓名',
-    }
-  ],
+const rules: ValidatorRules = {
+  date: {
+    required: true,
+    type: 'array',
+    min: 3,
+    label: '姓名',
+  },
   age: {
     required: true,
   },
@@ -21,12 +23,12 @@ const rules = {
     required: true,
     min: 6,
   },
-}
+};
 
 validator(source, rules)
   .then(() => {
-    console.log('验证通过')
+    console.log('验证通过');
   })
   .catch(({ errors, fields }) => {
-    console.log('错误', errors);
-  })
+    console.log('错误', errors, fields);
+  });

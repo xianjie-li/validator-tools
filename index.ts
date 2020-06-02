@@ -1,13 +1,9 @@
-import validator from "./validator";
+import validator from './source/validator';
+import { CreateMessagesTemplateConfig } from './source/interfaces';
 
-export interface CreateMessagesTemplateConfig {
-  /** true | 是否包含${name}变量 */
-  hasName?: boolean;
-  /** 'name' | 将name指定为指定的变量 */
-  nameKey?: string;
-}
-
-function createMessagesTemplate({ hasName = true, nameKey = 'name' } = {} as CreateMessagesTemplateConfig) {
+function createMessagesTemplate(
+  { hasName = true, nameKey = 'name' } = {} as CreateMessagesTemplateConfig,
+) {
   const nameVar = hasName ? `\${${nameKey}}` : '';
   const nameVarRightSpace = hasName ? `${nameVar} ` : '';
 
@@ -55,7 +51,8 @@ function createMessagesTemplate({ hasName = true, nameKey = 'name' } = {} as Cre
       range: `${nameVarRightSpace}必须在\${min}-\${max}项之间`,
     },
     pattern: {
-      mismatch: `${nameVarRightSpace}与模式不匹配 \${pattern}`,
+      // ${pattern}
+      mismatch: `${nameVarRightSpace}格式错误`,
     },
   };
 }

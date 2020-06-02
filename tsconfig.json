@@ -1,5 +1,15 @@
 {
+  "files": [
+    "./index.ts",
+    "./source/validator.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "compilerOptions": {
+    "typeRoots": [
+      "./local.d.ts"
+    ],
     "baseUrl": "./",
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */

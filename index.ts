@@ -1,3 +1,5 @@
+import validator from "./validator";
+
 interface Config {
   /** true | 是否包含${name}变量 */
   hasName?: boolean;
@@ -58,6 +60,6 @@ function createMessagesTemplate({ hasName = true, nameKey = 'name' } = {} as Con
   };
 }
 
-export { createMessagesTemplate };
+export { createMessagesTemplate, validator };
 
 export default createMessagesTemplate();

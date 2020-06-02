@@ -2,16 +2,16 @@
 ## 在[field-form](https://github.com/react-component/field-form)中使用
 
 ```ts
-import tpl, { createMessagesTemplate } from '@lxjx/async-filed-cn-template';
+import { createMessagesTemplate, template } from '@lxjx/validator-tools';
 
-// 可直接使用的模板对象，包含name
-console.log(tpl); 
+// 可在rc-field-form中直接使用的模板对象，包含name
+console.log(template); 
 
 // 自行指定name对应的模板变量名
 console.log(createMessagesTemplate({ nameKey: 'label' }));
 
 // 禁用name显示
-console.log(createMessagesTemplate({ hasName: false, nameKey: 'label' }));
+console.log(createMessagesTemplate({ hasName: false }));
 ```
 
 <br>
@@ -20,7 +20,7 @@ console.log(createMessagesTemplate({ hasName: false, nameKey: 'label' }));
 ## 在[async-validator](https://github.com/yiminghe/async-validator/)中使用 [暂未实现]
 ```ts
 // 导出一个对async-validator的简单封装, 省去Schema实例创建等繁琐步骤
-import validator from '@lxjx/async-filed-cn-template/validator';
+import { validator } from '@lxjx/validator-tools';
 
 validator.hasName = false; // 通过静态属性进行一些简单的配置
 

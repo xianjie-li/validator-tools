@@ -1,6 +1,6 @@
 {
-  "name": "@lxjx/async-filed-cn-template",
-  "description": "`async-validator` zh-CN messages template",
+  "name": "@lxjx/validator-tools",
+  "description": "`async-validator` zh-CN messages template and simple validator",
   "version": "1.0.1",
   "main": "./dist/index.js",
   "types": "./dist",
@@ -10,7 +10,7 @@
     "./dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc"
   },
   "devDependencies": {
     "typescript": "^3.9.2"

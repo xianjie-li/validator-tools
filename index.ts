@@ -1,13 +1,13 @@
 import validator from "./validator";
 
-interface Config {
+export interface CreateMessagesTemplateConfig {
   /** true | 是否包含${name}变量 */
   hasName?: boolean;
   /** 'name' | 将name指定为指定的变量 */
   nameKey?: string;
 }
 
-function createMessagesTemplate({ hasName = true, nameKey = 'name' } = {} as Config) {
+function createMessagesTemplate({ hasName = true, nameKey = 'name' } = {} as CreateMessagesTemplateConfig) {
   const nameVar = hasName ? `\${${nameKey}}` : '';
   const nameVarRightSpace = hasName ? `${nameVar} ` : '';
 

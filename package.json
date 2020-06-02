@@ -10,12 +10,17 @@
     "./dist"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "parcel ./dev.html",
+    "watch": "tsc -w"
   },
   "devDependencies": {
+    "parcel-bundler": "^1.12.4",
     "typescript": "^3.9.2"
   },
   "dependencies": {
+    "@lxjx/utils": "^1.4.5",
+    "async-validator": "^3.3.0",
     "tslib": "^2.0.0"
   }
 }

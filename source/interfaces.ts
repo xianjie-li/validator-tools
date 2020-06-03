@@ -1,7 +1,6 @@
-import { ErrorList, FieldErrorList, Rules, ValidateOption } from 'async-validator';
+import { ErrorList, FieldErrorList, Rules, ValidateOption, ValidateSource } from 'async-validator';
 
 /** 创建消息模板的一些配置项 */
-
 export interface CreateMessagesTemplateConfig {
   /** true | 是否包含${name}变量 */
   hasName?: boolean;
@@ -29,7 +28,7 @@ export interface MessageMetas {
   label: string;
 }
 
-/** 一个返回自定义验证msg的函数 */
+/** 自定义验证消息定制函数 */
 export interface ValidateMessagesCustomer {
   (meta: MessageMetas): string;
 }
@@ -41,9 +40,9 @@ export type ValidateMessagesStructure = {
 
 /** 由validator函数接收的配置对象，是原装ValidateOption的扩展 */
 export interface Options extends ValidateOption, CreateMessagesTemplateConfig {
-  validateMessages?: {
-    [key: string]: (meta: MessageMetas) => string;
-  };
+  // validateMessages?: {
+  //   [key: string]: (meta: MessageMetas) => string;
+  // };
 }
 
 /** 允许rules中包含任意字段 */
@@ -54,4 +53,29 @@ export interface ValidatorRules extends Rules {
 /** validator的回调，reject时返回包含同样参数值的对象 */
 export interface Callback {
   (errors?: ErrorList, fields?: FieldErrorList): void;
+}
+
+export interface Validator {
+  /**
+   * 验证器, 不带options用法
+   * @param source - 待验证的对象
+   * @param rules - 验证规则，详情见`async-validator`
+   * @param callback - 验证回调，和Promise用法二选一
+   * @return Promise - 走resolve表示验证成功，reject表示验证失败，参数为callback参数组成的对象
+   * */
+  (source: ValidateSource, rules: ValidatorRules, callback?: Callback): Promise<void>;
+  /**
+   * 验证器, 带options
+   * @param source - 待验证的对象
+   * @param rules - 验证规则，详情见`async-validator`
+   * @param options - 配置对象
+   * @param callback - 验证回调，和Promise用法二选一
+   * @return Promise - 走resolve表示验证成功，reject表示验证失败，参数为callback参数组成的对象
+   * */
+  (source: ValidateSource, rules: Rules, options?: Options, callback?: Callback): Promise<void>;
+  /**
+   * 自定义消息提示模板
+   * @param messagesTpl - 详情见`validateMessages.ts`
+   * */
+  messages(messagesTpl: ValidateMessagesStructure): void;
 }

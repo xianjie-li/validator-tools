@@ -1,19 +1,17 @@
-import validator from '../dist/validator';
+import validator, { ValidatorRules, messagesTemplate, createMessagesTemplate } from '../dist';
 import Schema, { Rules } from 'async-validator';
-import { ValidatorRules } from '../source/validator';
 
 const source = {
-  date: [2, 3],
+  name: '',
   age: 18,
   desc: 'safsaf',
   like: 'safsaf',
 };
 
 const rules: ValidatorRules = {
-  date: {
+  name: {
     required: true,
-    type: 'array',
-    min: 3,
+    // min: 3,
     label: '姓名',
   },
   age: {
@@ -25,7 +23,20 @@ const rules: ValidatorRules = {
   },
 };
 
-validator(source, rules)
+console.log(222, createMessagesTemplate({ hasName: false }));
+
+validator(source, rules, (err, errObj) => {
+  // ...
+});
+
+validator.messages({
+  required: meta => `${meta.label}该项必填`,
+  string: {
+    len: meta => `长度必须为${meta.args[1]}`,
+  },
+});
+
+validator(source, rules, { hasName: false })
   .then(() => {
     console.log('验证通过');
   })

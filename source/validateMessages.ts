@@ -4,7 +4,7 @@ const gMsg: ValidateMessagesCustomer = ({ options, label }) =>
   options.hasName ? `\`${label}\` ` : '';
 
 /** 内置验证消息模板 */
-const validateMessages: ValidateMessagesStructure = {
+let validateMessages: ValidateMessagesStructure = {
   default: meta => `${gMsg(meta)}字段验证错误`,
   required: meta => `${gMsg(meta)}该项必填`,
   enum: meta => `${gMsg(meta)}必须是${meta.args[1]}中的一个`,

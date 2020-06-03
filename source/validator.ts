@@ -1,18 +1,19 @@
 import Schema, { Rules, ValidateOption, ValidateSource } from 'async-validator';
 import { isArray, isFunction, isObject } from '@lxjx/utils';
+import _defaultsDeep from 'lodash/defaultsDeep';
 import {
   ValidateMessagesCustomer,
-  ValidateMessagesStructure,
   MessageMetas,
   Options,
-  ValidatorRules,
   Callback,
+  Validator,
+  ValidatorRules,
 } from './interfaces';
 import validateMessages from './validateMessages';
 
-/** 根据配置绝对抽取出`MessageMetas`然后注入并返回async-validator能理解的msg定制函数 */
+/** 根据配置抽取出`MessageMetas`然后注入并返回async-validator能理解的msg定制函数 */
 function msgHandler(
-  { rules, source, options }: { rules: any; source: any; options: Options },
+  { rules, source, options }: { rules: ValidatorRules; source: ValidateSource; options: Options },
   cb: (meta: MessageMetas) => string,
 ) {
   const nameKey = options.nameKey;
@@ -59,7 +60,6 @@ function msgHandler(
 function createMsg(source: ValidateSource, rules: Rules, options: Options) {
   const opt = { rules, source, options };
 
-  /* TODO: 合并传入配置 */
   const msgTpl: any = {};
   Object.entries(validateMessages).forEach(([key, val]) => {
     const isFn = isFunction(val);
@@ -83,23 +83,12 @@ const defaultOpt: Options = {
   hasName: true,
 };
 
-function validator(
-  source: ValidateSource,
-  rules: ValidatorRules,
-  callback?: Callback,
-): Promise<void>;
-function validator(
-  source: ValidateSource,
-  rules: Rules,
-  options?: Options,
-  callback?: Callback,
-): Promise<void>;
-function validator(
+const validator: Validator = (
   source: ValidateSource,
   rules: Rules,
   options?: any,
   callback?: any,
-): Promise<void> {
+) => {
   const hasOptions = isObject(options);
   const opt: ValidateOption = hasOptions ? { ...defaultOpt, ...options } : defaultOpt;
   const cb: Callback = hasOptions ? callback : options;
@@ -108,12 +97,17 @@ function validator(
 
   const msg = createMsg(source, rules, opt);
 
-  console.log(msg);
-
   // @ts-ignore
   schema.messages(msg);
 
   return schema.validate(source, opt, cb);
-}
+};
+
+validator.messages = messagesTpl => {
+  const deep = _defaultsDeep({}, messagesTpl, validateMessages);
+
+  // 直接替换内置模板
+  Object.assign(validateMessages, deep);
+};
 
 export default validator;

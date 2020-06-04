@@ -84,7 +84,7 @@ interface ValidateOption {
 
 ## 定制消息模板
 
-与内置模板深合并, 内置模板见[validateMessages.ts](source)
+与内置模板深合并, 内置模板见[validateMessages.ts](https://github.com/Iixianjie/validator-tools/blob/master/source/validateMessages.ts)
 
 ```ts
 validator.messages({

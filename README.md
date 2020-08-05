@@ -12,7 +12,7 @@
 ## 使用
 
 ```ts
-import validator, { ValidatorRules } from '@lxjx/validator-tools';
+import validator, { ValidatorRules } from '@lxjx/validate-tools';
 
 const source = {
   name: 'lxj',
@@ -102,7 +102,7 @@ validator.messages({
 ## 生成[field-form](https://github.com/react-component/field-form)中文验证模板
 
 ```ts
-import { messagesTemplate, createMessagesTemplate } from '@lxjx/validator-tools';
+import { messagesTemplate, createMessagesTemplate } from '@lxjx/validate-tools';
 
 // 可在rc-field-form中直接使用的消息模板对象，默认包含name
 console.log(messagesTemplate); 
